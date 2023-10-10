@@ -30,7 +30,7 @@ async function Running() {
     // } else {
     //const currentVersion = JSON.parse(readFileSync(resolvePath(global.mainPath, "package.json"));
     axios.get(`https://raw.githubusercontent.com/nhatcoder2003/Gbot-War/main/package.json`).then((res) => {
-      const currentVersion = '2.0.0';
+      const currentVersion = JSON.parse(readFileSync(resolvePath(global.mainPath,"package.json"))).version;
       if (semver.lt(currentVersion, res.data.version)) {
         admin.forEach(id => {
           global.api.sendMessage('『Đã có phiên bản mới trên hệ thống vui lòng cập nhật lên phiên bản mới nhất để chạy ổn định hơn』\n━━━━━━━━━━━━━━━━\n•Phiên bản hiện tại: '+currentVersion+'\n•Phiên bản mới: '+res.data.version+'\n━━━━━━━━━━━━━━━━\nĐây là tin nhắn tự động\nVui lòng sử dụng lệnh npm run update để cập nhật lên phiên bản mới nhất', id);
